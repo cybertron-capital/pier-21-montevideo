@@ -10,7 +10,6 @@
     :root {
       --navy: #0F172A;
       --navy-light: #1E293B;
-      --blue-accent: #1E3A8A;
       --gold: #D97706;
       --gold-light: #F59E0B;
       --sand: #F8F5F0;
@@ -33,8 +32,8 @@
       transition: all .3s;
     }
     nav.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,0.3); padding: 12px 5%; }
-    .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 600; color: var(--white); letter-spacing: 2px; text-transform: uppercase; }
-    .nav-logo span { color: var(--gold-light); font-style: italic; }
+    .nav-logo { display: flex; align-items: center; text-decoration: none; }
+    .nav-logo img { height: 48px; width: auto; object-fit: contain; display: block; }
     .nav-links { display: flex; gap: 28px; list-style: none; align-items: center; }
     .nav-links a { text-decoration: none; font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.8); transition: color .25s; }
     .nav-links a:hover { color: var(--gold-light); }
@@ -54,13 +53,11 @@
       display: inline-block; font-size: 10px; font-weight: 600; letter-spacing: 4px;
       text-transform: uppercase; color: #FDE68A;
       border: 1px solid rgba(253, 230, 138, 0.3); padding: 8px 24px; margin-bottom: 24px;
-      animation: fadeInDown .8s ease both;
     }
     .hero h1 {
       font-family: 'Cormorant Garamond', serif;
       font-size: clamp(52px, 9vw, 96px); font-weight: 300;
       color: var(--white); line-height: 0.95; margin-bottom: 12px;
-      animation: fadeInUp .9s ease both .1s;
     }
     .hero h1 em { font-style: italic; color: var(--gold-light); font-weight: 400; }
     .hero-sub { font-size: 11px; letter-spacing: 5px; text-transform: uppercase; color: rgba(255,255,255,0.7); margin-bottom: 20px; }
@@ -153,8 +150,8 @@
     /* FOOTER */
     footer { background: var(--navy); color: var(--white); padding: 60px 5% 36px; border-top: 1px solid rgba(255,255,255,0.08); }
     .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; max-width: 1100px; margin: 0 auto 40px; }
-    .footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 28px; margin-bottom: 16px; }
-    .footer-brand span { color: var(--gold-light); font-style: italic; }
+    .footer-brand { display: flex; align-items: center; margin-bottom: 16px; }
+    .footer-brand img { height: 50px; width: auto; object-fit: contain; display: block; }
     .footer-desc { font-size: 12px; color: rgba(255,255,255,0.5); line-height: 1.8; }
     footer h4 { font-size: 10px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--gold-light); margin-bottom: 20px; }
     footer ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
@@ -167,12 +164,6 @@
     .wa-float:hover { transform: scale(1.1); }
     .wa-float svg { width: 28px; height: 28px; fill: white; }
 
-    /* ANIMATIONS */
-    @keyframes fadeInDown { from { opacity:0; transform:translateY(-20px); } to { opacity:1; transform:translateY(0); } }
-    @keyframes fadeInUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
-    .reveal { opacity:0; transform:translateY(28px); transition: opacity .7s ease, transform .7s ease; }
-    .reveal.visible { opacity:1; transform:translateY(0); }
-
     @media (max-width:900px) {
       .nav-links { display:none; }
       .about-grid, .menu-grid, .reviews-grid, .footer-grid { grid-template-columns: 1fr; gap: 40px; }
@@ -184,7 +175,9 @@
 <body>
 
   <nav id="navbar">
-    <div class="nav-logo">Pier <span>21</span></div>
+    <a href="#" class="nav-logo">
+      <img src="logo.png" alt="Pier 21 Logo"/>
+    </a>
     <ul class="nav-links">
       <li><a href="#sobre">Nosotros</a></li>
       <li><a href="#menu">Menú</a></li>
@@ -212,97 +205,51 @@
 
   <section class="about" id="sobre">
     <div class="about-grid">
-      <div class="about-img reveal">
+      <div class="about-img">
         <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=900&q=80" alt="Pier 21 Terraza"/>
         <div class="about-img-badge">
           <span>Montevideo</span>
           <span>Rambla Gandhi</span>
         </div>
       </div>
-      <div class="reveal">
+      <div>
         <p class="section-label">Nuestra Propuesta</p>
         <h2 class="section-title">Una experiencia <em>única</em> sobre la costa</h2>
         <p class="section-desc">Ubicado en un punto privilegiado de la Rambla Mahatma Gandhi, Pier 21 combina la calidez de la arquitectura en madera con ventanales hacia la costa uruguaya.</p>
         <p class="section-desc" style="margin-top:16px">Ideal para almuerzos al sol en nuestra terraza cubierta, atardeceres aperitivos o cenas íntimas al ritmo de la brisa marina.</p>
         <div class="about-stats">
-          <div class="stat">
-            <div class="stat-num">44+</div>
-            <div class="stat-lbl">Opiniones</div>
-          </div>
-          <div class="stat">
-            <div class="stat-num">$1.400</div>
-            <div class="stat-lbl">Promedio UYU</div>
-          </div>
-          <div class="stat">
-            <div class="stat-num">100%</div>
-            <div class="stat-lbl">Vista Costa</div>
-          </div>
+          <div class="stat"><div class="stat-num">44+</div><div class="stat-lbl">Opiniones</div></div>
+          <div class="stat"><div class="stat-num">$1.400</div><div class="stat-lbl">Promedio UYU</div></div>
+          <div class="stat"><div class="stat-num">100%</div><div class="stat-lbl">Vista Costa</div></div>
         </div>
       </div>
     </div>
   </section>
 
   <section class="menu" id="menu">
-    <div class="menu-header reveal">
+    <div class="menu-header">
       <p class="section-label">Carta & Sabores</p>
       <h2 class="section-title">Nuestro <em>Menú</em></h2>
       <p class="section-desc">Selección destacada de la cocina costera uruguaya con ingredientes frescos de estación.</p>
     </div>
     <div class="menu-grid">
-      <div class="menu-category reveal">
+      <div class="menu-category">
         <div class="menu-category-title">Entradas & Tapas <span>🍤</span></div>
-        <div class="menu-item">
-          <div class="menu-item-head">
-            <span class="menu-item-name">Rabas de la Casa</span>
-            <span class="menu-item-price">$ 580</span>
-          </div>
-          <div class="menu-item-desc">Crocantes al limón con alioli artesanal de ajo asado.</div>
-        </div>
-        <div class="menu-item">
-          <div class="menu-item-head">
-            <span class="menu-item-name">Tabla Mar y Tierra</span>
-            <span class="menu-item-price">$ 890</span>
-          </div>
-          <div class="menu-item-desc">Chipirones sellados, jamón crudo serrano, quesos de la colonia y aceitunas marinadas.</div>
-        </div>
-        <div class="menu-item">
-          <div class="menu-item-head">
-            <span class="menu-item-name">Empanaditas de Sirí</span>
-            <span class="menu-item-price">$ 450</span>
-          </div>
-          <div class="menu-item-desc">Rellenas de carne de sirí atlántico sofrita en vegetales verdes.</div>
-        </div>
+        <div class="menu-item"><div class="menu-item-head"><span class="menu-item-name">Rabas de la Casa</span><span class="menu-item-price">$ 580</span></div><div class="menu-item-desc">Crocantes al limón con alioli artesanal de ajo asado.</div></div>
+        <div class="menu-item"><div class="menu-item-head"><span class="menu-item-name">Tabla Mar y Tierra</span><span class="menu-item-price">$ 890</span></div><div class="menu-item-desc">Chipirones sellados, jamón crudo serrano, quesos de la colonia y aceitunas marinadas.</div></div>
+        <div class="menu-item"><div class="menu-item-head"><span class="menu-item-name">Empanaditas de Sirí</span><span class="menu-item-price">$ 450</span></div><div class="menu-item-desc">Rellenas de carne de sirí atlántico sofrita en vegetales verdes.</div></div>
       </div>
-
-      <div class="menu-category reveal">
+      <div class="menu-category">
         <div class="menu-category-title">Platos Principales <span>🥩</span></div>
-        <div class="menu-item">
-          <div class="menu-item-head">
-            <span class="menu-item-name">Pesca del Día a las Hierbas</span>
-            <span class="menu-item-price">$ 790</span>
-          </div>
-          <div class="menu-item-desc">Filete de pesca artesanal a la plancha con puré rústico y vegetales grillados.</div>
-        </div>
-        <div class="menu-item">
-          <div class="menu-item-head">
-            <span class="menu-item-name">Ojo de Bife Pier 21</span>
-            <span class="menu-item-price">$ 850</span>
-          </div>
-          <div class="menu-item-desc">350g de carne uruguaya seleccionada con papas cuña con romero.</div>
-        </div>
-        <div class="menu-item">
-          <div class="menu-item-head">
-            <span class="menu-item-name">Risotto de Frutos del Mar</span>
-            <span class="menu-item-price">$ 820</span>
-          </div>
-          <div class="menu-item-desc">Arroz carnaroli con camarones, mejillones y toque de vino blanco.</div>
-        </div>
+        <div class="menu-item"><div class="menu-item-head"><span class="menu-item-name">Pesca del Día a las Hierbas</span><span class="menu-item-price">$ 790</span></div><div class="menu-item-desc">Filete de pesca artesanal a la plancha con puré rústico y vegetales grillados.</div></div>
+        <div class="menu-item"><div class="menu-item-head"><span class="menu-item-name">Ojo de Bife Pier 21</span><span class="menu-item-price">$ 850</span></div><div class="menu-item-desc">350g de carne uruguaya seleccionada con papas cuña con romero.</div></div>
+        <div class="menu-item"><div class="menu-item-head"><span class="menu-item-name">Risotto de Frutos del Mar</span><span class="menu-item-price">$ 820</span></div><div class="menu-item-desc">Arroz carnaroli con camarones, mejillones y toque de vino blanco.</div></div>
       </div>
     </div>
   </section>
 
   <section class="gallery" id="galeria">
-    <div class="gallery-header reveal">
+    <div class="gallery-header">
       <p class="section-label" style="color:var(--gold-light)">Instalaciones</p>
       <h2 class="section-title" style="color:var(--white)">La <em>Terraza</em> & Ambiente</h2>
     </div>
@@ -315,48 +262,26 @@
   </section>
 
   <section class="reviews" id="resenas">
-    <p class="section-label reveal">Experiencias de Visitantes</p>
-    <h2 class="section-title reveal">Lo que dicen en <em>Google</em></h2>
+    <p class="section-label">Experiencias de Visitantes</p>
+    <h2 class="section-title">Lo que dicen en <em>Google</em></h2>
     <div class="reviews-grid">
-      <div class="review-card reveal">
-        <div class="review-stars">★★★★★</div>
-        <p class="review-text">"La vista a la rambla es inmejorable. Almorzamos en la terraza y la atención fue muy atenta. La pesca del día súper fresca."</p>
-        <div class="review-author">Agustín L. · Montevideo</div>
-      </div>
-      <div class="review-card reveal">
-        <div class="review-stars">★★★★★</div>
-        <p class="review-text">"Excelente lugar para ver el atardecer con una copa de vino. Muy buena ambientación en madera y platos abundantes."</p>
-        <div class="review-author">Mariana P. · Uruguay</div>
-      </div>
-      <div class="review-card reveal">
-        <div class="review-stars">★★★★★</div>
-        <p class="review-text">"El ojo de bife a punto perfecto y la atención de diez. Muy recomendado si caminas por la rambla Gandhi."</p>
-        <div class="review-author">Gonzalo T. · Google Review</div>
-      </div>
+      <div class="review-card"><div class="review-stars">★★★★★</div><p class="review-text">"La vista a la rambla es inmejorable. Almorzamos en la terraza y la atención fue muy atenta. La pesca del día súper fresca."</p><div class="review-author">Agustín L. · Montevideo</div></div>
+      <div class="review-card"><div class="review-stars">★★★★★</div><p class="review-text">"Excelente lugar para ver el atardecer con una copa de vino. Muy buena ambientación en madera y platos abundantes."</p><div class="review-author">Mariana P. · Uruguay</div></div>
+      <div class="review-card"><div class="review-stars">★★★★★</div><p class="review-text">"El ojo de bife a punto perfecto y la atención de diez. Muy recomendado si caminas por la rambla Gandhi."</p><div class="review-author">Gonzalo T. · Google Review</div></div>
     </div>
   </section>
 
   <section class="booking" id="reservas">
-    <div class="reveal">
+    <div>
       <p class="section-label" style="color:var(--gold-light)">Reserva de Mesa</p>
       <h2 class="section-title" style="color:var(--white)">Asegura tu lugar en <em>Pier 21</em></h2>
       <p style="color:rgba(255,255,255,0.7);font-size:14px">Completa los datos y te redirigiremos a WhatsApp para confirmar la mesa en segundos.</p>
     </div>
-    
-    <div class="booking-box reveal">
-      <div class="form-group">
-        <label>Nombre Completo</label>
-        <input type="text" id="res-name" class="form-control" placeholder="Ej. Juan Pérez"/>
-      </div>
+    <div class="booking-box">
+      <div class="form-group"><label>Nombre Completo</label><input type="text" id="res-name" class="form-control" placeholder="Ej. Juan Pérez"/></div>
       <div class="form-row">
-        <div class="form-group">
-          <label>Fecha</label>
-          <input type="date" id="res-date" class="form-control"/>
-        </div>
-        <div class="form-group">
-          <label>Hora</label>
-          <input type="time" id="res-time" class="form-control" value="20:30"/>
-        </div>
+        <div class="form-group"><label>Fecha</label><input type="date" id="res-date" class="form-control"/></div>
+        <div class="form-group"><label>Hora</label><input type="time" id="res-time" class="form-control" value="20:30"/></div>
       </div>
       <div class="form-group">
         <label>Cantidad de Personas</label>
@@ -374,9 +299,9 @@
   </section>
 
   <section class="horarios" id="horarios">
-    <p class="section-label reveal">Visítanos</p>
-    <h2 class="section-title reveal">Horarios & <em>Ubicación</em></h2>
-    <div class="horarios-box reveal">
+    <p class="section-label">Visítanos</p>
+    <h2 class="section-title">Horarios & <em>Ubicación</em></h2>
+    <div class="horarios-box">
       <div class="horario-row"><span class="dia">Lunes a Domingo</span><span class="hora">12:00 PM — 12:00 AM</span></div>
       <div class="address-block">
         <div>📍 <a href="https://maps.google.com/?q=Rbla.+Mahatma+Gandhi,+Montevideo" target="_blank">Rbla. Mahatma Gandhi, 11300 Montevideo</a></div>
@@ -388,7 +313,7 @@
   <footer>
     <div class="footer-grid">
       <div>
-        <div class="footer-brand">Pier <span>21</span></div>
+        <div class="footer-brand"><img src="logo.png" alt="Pier 21 Logo"/></div>
         <p class="footer-desc">Restaurante & Terraza frente al mar en la Rambla de Montevideo, Uruguay.</p>
       </div>
       <div>
@@ -423,24 +348,14 @@
     window.addEventListener('scroll', () => {
       document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
     });
-
-    const reveals = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-    }, { threshold: 0.1 });
-    reveals.forEach(el => observer.observe(el));
-
     function sendReservation() {
       const name = document.getElementById('res-name').value || 'Cliente';
       const date = document.getElementById('res-date').value || 'Por acordar';
       const time = document.getElementById('res-time').value || '20:30';
       const guests = document.getElementById('res-guests').value;
-      
       const text = `Hola Pier 21! Quisiera reservar una mesa para ${guests}.\n\n📌 Nombre: ${name}\n📅 Fecha: ${date}\n⏰ Hora: ${time}`;
       window.open(`https://wa.me/59899910600?text=${encodeURIComponent(text)}`, '_blank');
     }
   </script>
-
 </body>
 </html>
-Tue Oct 27 17:41:06 -03 2026
