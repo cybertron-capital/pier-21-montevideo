@@ -1,5 +1,445 @@
 <!DOCTYPE html>
 <html lang="es">
-head/>
-<body><h1>Pier 21</h1></body>
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pier 21 | Restaurante & Terraza en la Rambla | Montevideo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #0F172A;
+      --navy-light: #1E293B;
+      --blue-accent: #1E3A8A;
+      --gold: #D97706;
+      --gold-light: #F59E0B;
+      --sand: #F8F5F0;
+      --sand-dark: #EFECE6;
+      --text: #0F172A;
+      --text-muted: #64748B;
+      --white: #FFFFFF;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Montserrat', sans-serif; background: var(--sand); color: var(--text); overflow-x: hidden; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 5%;
+      background: rgba(15, 23, 42, 0.94);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      transition: all .3s;
+    }
+    nav.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,0.3); padding: 12px 5%; }
+    .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 600; color: var(--white); letter-spacing: 2px; text-transform: uppercase; }
+    .nav-logo span { color: var(--gold-light); font-style: italic; }
+    .nav-links { display: flex; gap: 28px; list-style: none; align-items: center; }
+    .nav-links a { text-decoration: none; font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.8); transition: color .25s; }
+    .nav-links a:hover { color: var(--gold-light); }
+    .nav-cta { background: var(--gold) !important; color: var(--white) !important; padding: 10px 22px; border-radius: 2px; transition: background .3s !important; }
+    .nav-cta:hover { background: var(--gold-light) !important; }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(180deg, rgba(15,23,42,0.85) 0%, rgba(15,23,42,0.65) 100%), url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1800&q=80') center/cover no-repeat;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; padding: 120px 5% 80px;
+      position: relative; overflow: hidden;
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 800px; }
+    .hero-badge {
+      display: inline-block; font-size: 10px; font-weight: 600; letter-spacing: 4px;
+      text-transform: uppercase; color: #FDE68A;
+      border: 1px solid rgba(253, 230, 138, 0.3); padding: 8px 24px; margin-bottom: 24px;
+      animation: fadeInDown .8s ease both;
+    }
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(52px, 9vw, 96px); font-weight: 300;
+      color: var(--white); line-height: 0.95; margin-bottom: 12px;
+      animation: fadeInUp .9s ease both .1s;
+    }
+    .hero h1 em { font-style: italic; color: var(--gold-light); font-weight: 400; }
+    .hero-sub { font-size: 11px; letter-spacing: 5px; text-transform: uppercase; color: rgba(255,255,255,0.7); margin-bottom: 20px; }
+    .hero-stars { color: #F59E0B; font-size: 18px; margin-bottom: 24px; letter-spacing: 3px; }
+    .hero-stars span { font-size: 11px; color: rgba(255,255,255,0.8); font-family: 'Montserrat', sans-serif; letter-spacing: 1px; margin-left: 8px; }
+    .hero p { font-size: 15px; color: rgba(255,255,255,0.85); line-height: 1.8; margin-bottom: 40px; font-weight: 300; max-width: 620px; margin-left: auto; margin-right: auto; }
+    .hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+    /* BUTTONS */
+    .btn-primary { background: var(--gold); color: var(--white); text-decoration: none; padding: 16px 36px; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; transition: all .3s; border-radius: 2px; display: inline-block; }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(217,119,6,0.4); }
+    .btn-outline { border: 1px solid rgba(255,255,255,0.4); color: var(--white); text-decoration: none; padding: 16px 36px; font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; transition: all .3s; border-radius: 2px; display: inline-block; }
+    .btn-outline:hover { border-color: var(--gold-light); color: var(--gold-light); }
+    .btn-wa { display: inline-flex; align-items: center; gap: 10px; background: #25D366; color: var(--white); text-decoration: none; padding: 16px 36px; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; border-radius: 2px; transition: all .3s; border:none; cursor:pointer; }
+    .btn-wa:hover { background: #1ebe5d; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(37,211,102,0.35); }
+
+    /* STRIP */
+    .strip { background: var(--navy); padding: 16px; text-align: center; font-size: 11px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.85); border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .strip span { color: var(--gold-light); }
+
+    /* SECTIONS */
+    section { padding: 90px 5%; }
+    .section-label { font-size: 10px; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+    .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(38px, 5vw, 56px); font-weight: 400; color: var(--navy); line-height: 1.1; margin-bottom: 20px; }
+    .section-title em { font-style: italic; color: var(--gold); }
+    .section-desc { font-size: 14px; color: var(--text-muted); line-height: 1.8; max-width: 580px; font-weight: 300; }
+
+    /* ABOUT */
+    .about { background: var(--white); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 70px; align-items: center; max-width: 1100px; margin: 0 auto; }
+    .about-img { position: relative; }
+    .about-img img { width: 100%; height: 500px; object-fit: cover; display: block; border-radius: 2px; }
+    .about-img-badge { position: absolute; bottom: -24px; right: -24px; background: var(--navy); color: var(--white); padding: 24px; text-align: center; border: 1px solid rgba(255,255,255,0.1); }
+    .about-img-badge span:first-child { font-family: 'Cormorant Garamond', serif; font-size: 38px; color: var(--gold-light); line-height: 1; display: block; }
+    .about-img-badge span:last-child { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.7); }
+    .about-stats { display: flex; gap: 16px; margin-top: 40px; }
+    .stat { text-align: center; padding: 20px; background: var(--sand); border-radius: 2px; flex: 1; }
+    .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 36px; color: var(--navy); line-height: 1; }
+    .stat-lbl { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); margin-top: 6px; }
+
+    /* MENU */
+    .menu { background: var(--sand); }
+    .menu-header { text-align: center; margin-bottom: 60px; }
+    .menu-header .section-desc { margin: 0 auto; }
+    .menu-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; max-width: 1100px; margin: 0 auto; }
+    .menu-category { background: var(--white); padding: 40px; border-radius: 2px; box-shadow: 0 4px 20px rgba(0,0,0,0.03); }
+    .menu-category-title { font-family: 'Cormorant Garamond', serif; font-size: 28px; color: var(--navy); margin-bottom: 24px; padding-bottom: 12px; border-bottom: 1px solid var(--sand-dark); display: flex; justify-content: space-between; align-items: center; }
+    .menu-item { margin-bottom: 20px; }
+    .menu-item:last-child { margin-bottom: 0; }
+    .menu-item-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px; }
+    .menu-item-name { font-weight: 600; font-size: 15px; color: var(--navy); }
+    .menu-item-price { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 600; color: var(--gold); }
+    .menu-item-desc { font-size: 12px; color: var(--text-muted); line-height: 1.6; font-weight: 300; }
+
+    /* GALLERY */
+    .gallery { background: var(--navy); padding: 90px 0; }
+    .gallery-header { text-align: center; padding: 0 5%; margin-bottom: 50px; }
+    .gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; }
+    .gallery-item { overflow: hidden; position: relative; height: 260px; }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s; }
+    .gallery-item:hover img { transform: scale(1.08); }
+
+    /* REVIEWS */
+    .reviews { background: var(--white); text-align: center; }
+    .reviews-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; max-width: 1100px; margin: 50px auto 0; }
+    .review-card { background: var(--sand); padding: 36px; text-align: left; border-radius: 2px; }
+    .review-stars { color: #F59E0B; font-size: 14px; margin-bottom: 14px; }
+    .review-text { font-size: 13px; color: var(--text-muted); line-height: 1.8; font-style: italic; margin-bottom: 20px; font-weight: 300; }
+    .review-author { font-size: 11px; font-weight: 700; color: var(--navy); letter-spacing: 1px; }
+
+    /* RESERVA FORM */
+    .booking { background: linear-gradient(180deg, var(--navy) 0%, var(--navy-light) 100%); text-align: center; }
+    .booking-box { max-width: 600px; margin: 40px auto 0; background: rgba(255,255,255,0.04); padding: 40px; border: 1px solid rgba(255,255,255,0.1); border-radius: 2px; text-align: left; }
+    .form-group { margin-bottom: 20px; }
+    .form-group label { display: block; font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--gold-light); margin-bottom: 8px; }
+    .form-control { width: 100%; padding: 14px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15); color: var(--white); font-family: 'Montserrat', sans-serif; font-size: 13px; border-radius: 2px; }
+    .form-control:focus { outline: none; border-color: var(--gold-light); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+    /* HORARIOS */
+    .horarios { background: var(--sand); text-align: center; }
+    .horarios-box { max-width: 600px; margin: 40px auto 0; background: var(--white); padding: 48px; box-shadow: 0 4px 30px rgba(0,0,0,0.04); }
+    .horario-row { display: flex; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid var(--sand-dark); font-size: 13px; }
+    .horario-row:last-child { border-bottom: none; }
+    .dia { font-weight: 600; color: var(--navy); }
+    .hora { color: var(--text-muted); }
+    .address-block { margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--sand-dark); display: flex; flex-direction: column; gap: 10px; font-size: 13px; }
+    .address-block a { color: var(--navy); font-weight: 600; text-decoration: none; }
+
+    /* FOOTER */
+    footer { background: var(--navy); color: var(--white); padding: 60px 5% 36px; border-top: 1px solid rgba(255,255,255,0.08); }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; max-width: 1100px; margin: 0 auto 40px; }
+    .footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 28px; margin-bottom: 16px; }
+    .footer-brand span { color: var(--gold-light); font-style: italic; }
+    .footer-desc { font-size: 12px; color: rgba(255,255,255,0.5); line-height: 1.8; }
+    footer h4 { font-size: 10px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--gold-light); margin-bottom: 20px; }
+    footer ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    footer ul li a { font-size: 12px; color: rgba(255,255,255,0.6); text-decoration: none; transition: color .25s; }
+    footer ul li a:hover { color: var(--gold-light); }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 24px; display: flex; justify-content: space-between; max-width: 1100px; margin: 0 auto; font-size: 11px; color: rgba(255,255,255,0.4); }
+
+    /* WA FLOAT */
+    .wa-float { position: fixed; bottom: 28px; right: 28px; width: 60px; height: 60px; background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 24px rgba(37,211,102,0.4); z-index: 200; text-decoration: none; transition: transform .3s; }
+    .wa-float:hover { transform: scale(1.1); }
+    .wa-float svg { width: 28px; height: 28px; fill: white; }
+
+    /* ANIMATIONS */
+    @keyframes fadeInDown { from { opacity:0; transform:translateY(-20px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes fadeInUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+    .reveal { opacity:0; transform:translateY(28px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+
+    @media (max-width:900px) {
+      .nav-links { display:none; }
+      .about-grid, .menu-grid, .reviews-grid, .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+      .form-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="navbar">
+    <div class="nav-logo">Pier <span>21</span></div>
+    <ul class="nav-links">
+      <li><a href="#sobre">Nosotros</a></li>
+      <li><a href="#menu">Menú</a></li>
+      <li><a href="#galeria">Terraza</a></li>
+      <li><a href="#resenas">Opiniones</a></li>
+      <li><a href="#reservas" class="nav-cta">Reservar Mesa</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-badge">Rambla Mahatma Gandhi · Montevideo</div>
+      <h1>Pier <em>21</em></h1>
+      <div class="hero-sub">Restaurante & Terraza frente al Mar</div>
+      <div class="hero-stars">★★★★★ <span>44 opiniones en Google</span></div>
+      <p>Gastronomía de autor, mariscos frescos y cortes seleccionados acompañados por una vista inigualable del Río de la Plata.</p>
+      <div class="hero-btns">
+        <a href="#reservas" class="btn-primary">Reservar mesa</a>
+        <a href="#menu" class="btn-outline">Ver Menú</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="strip">🌊 <span>Vista Panorámica al Mar</span> &nbsp;·&nbsp; Abierto hasta las 12:00 AM &nbsp;·&nbsp; Rambla Mahatma Gandhi 🌊</div>
+
+  <section class="about" id="sobre">
+    <div class="about-grid">
+      <div class="about-img reveal">
+        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=900&q=80" alt="Pier 21 Terraza"/>
+        <div class="about-img-badge">
+          <span>Montevideo</span>
+          <span>Rambla Gandhi</span>
+        </div>
+      </div>
+      <div class="reveal">
+        <p class="section-label">Nuestra Propuesta</p>
+        <h2 class="section-title">Una experiencia <em>única</em> sobre la costa</h2>
+        <p class="section-desc">Ubicado en un punto privilegiado de la Rambla Mahatma Gandhi, Pier 21 combina la calidez de la arquitectura en madera con ventanales hacia la costa uruguaya.</p>
+        <p class="section-desc" style="margin-top:16px">Ideal para almuerzos al sol en nuestra terraza cubierta, atardeceres aperitivos o cenas íntimas al ritmo de la brisa marina.</p>
+        <div class="about-stats">
+          <div class="stat">
+            <div class="stat-num">44+</div>
+            <div class="stat-lbl">Opiniones</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">$1.400</div>
+            <div class="stat-lbl">Promedio UYU</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">100%</div>
+            <div class="stat-lbl">Vista Costa</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="menu" id="menu">
+    <div class="menu-header reveal">
+      <p class="section-label">Carta & Sabores</p>
+      <h2 class="section-title">Nuestro <em>Menú</em></h2>
+      <p class="section-desc">Selección destacada de la cocina costera uruguaya con ingredientes frescos de estación.</p>
+    </div>
+    <div class="menu-grid">
+      <div class="menu-category reveal">
+        <div class="menu-category-title">Entradas & Tapas <span>🍤</span></div>
+        <div class="menu-item">
+          <div class="menu-item-head">
+            <span class="menu-item-name">Rabas de la Casa</span>
+            <span class="menu-item-price">$ 580</span>
+          </div>
+          <div class="menu-item-desc">Crocantes al limón con alioli artesanal de ajo asado.</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-head">
+            <span class="menu-item-name">Tabla Mar y Tierra</span>
+            <span class="menu-item-price">$ 890</span>
+          </div>
+          <div class="menu-item-desc">Chipirones sellados, jamón crudo serrano, quesos de la colonia y aceitunas marinadas.</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-head">
+            <span class="menu-item-name">Empanaditas de Sirí</span>
+            <span class="menu-item-price">$ 450</span>
+          </div>
+          <div class="menu-item-desc">Rellenas de carne de sirí atlántico sofrita en vegetales verdes.</div>
+        </div>
+      </div>
+
+      <div class="menu-category reveal">
+        <div class="menu-category-title">Platos Principales <span>🥩</span></div>
+        <div class="menu-item">
+          <div class="menu-item-head">
+            <span class="menu-item-name">Pesca del Día a las Hierbas</span>
+            <span class="menu-item-price">$ 790</span>
+          </div>
+          <div class="menu-item-desc">Filete de pesca artesanal a la plancha con puré rústico y vegetales grillados.</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-head">
+            <span class="menu-item-name">Ojo de Bife Pier 21</span>
+            <span class="menu-item-price">$ 850</span>
+          </div>
+          <div class="menu-item-desc">350g de carne uruguaya seleccionada con papas cuña con romero.</div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-head">
+            <span class="menu-item-name">Risotto de Frutos del Mar</span>
+            <span class="menu-item-price">$ 820</span>
+          </div>
+          <div class="menu-item-desc">Arroz carnaroli con camarones, mejillones y toque de vino blanco.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="gallery" id="galeria">
+    <div class="gallery-header reveal">
+      <p class="section-label" style="color:var(--gold-light)">Instalaciones</p>
+      <h2 class="section-title" style="color:var(--white)">La <em>Terraza</em> & Ambiente</h2>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item"><img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&q=80" alt="Terraza Pier 21"/></div>
+      <div class="gallery-item"><img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600&q=80" alt="Plato Pier 21"/></div>
+      <div class="gallery-item"><img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=600&q=80" alt="Vinos Pier 21"/></div>
+      <div class="gallery-item"><img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=600&q=80" alt="Carne Pier 21"/></div>
+    </div>
+  </section>
+
+  <section class="reviews" id="resenas">
+    <p class="section-label reveal">Experiencias de Visitantes</p>
+    <h2 class="section-title reveal">Lo que dicen en <em>Google</em></h2>
+    <div class="reviews-grid">
+      <div class="review-card reveal">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"La vista a la rambla es inmejorable. Almorzamos en la terraza y la atención fue muy atenta. La pesca del día súper fresca."</p>
+        <div class="review-author">Agustín L. · Montevideo</div>
+      </div>
+      <div class="review-card reveal">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Excelente lugar para ver el atardecer con una copa de vino. Muy buena ambientación en madera y platos abundantes."</p>
+        <div class="review-author">Mariana P. · Uruguay</div>
+      </div>
+      <div class="review-card reveal">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"El ojo de bife a punto perfecto y la atención de diez. Muy recomendado si caminas por la rambla Gandhi."</p>
+        <div class="review-author">Gonzalo T. · Google Review</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="booking" id="reservas">
+    <div class="reveal">
+      <p class="section-label" style="color:var(--gold-light)">Reserva de Mesa</p>
+      <h2 class="section-title" style="color:var(--white)">Asegura tu lugar en <em>Pier 21</em></h2>
+      <p style="color:rgba(255,255,255,0.7);font-size:14px">Completa los datos y te redirigiremos a WhatsApp para confirmar la mesa en segundos.</p>
+    </div>
+    
+    <div class="booking-box reveal">
+      <div class="form-group">
+        <label>Nombre Completo</label>
+        <input type="text" id="res-name" class="form-control" placeholder="Ej. Juan Pérez"/>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Fecha</label>
+          <input type="date" id="res-date" class="form-control"/>
+        </div>
+        <div class="form-group">
+          <label>Hora</label>
+          <input type="time" id="res-time" class="form-control" value="20:30"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Cantidad de Personas</label>
+        <select id="res-guests" class="form-control">
+          <option value="2 personas">2 personas</option>
+          <option value="4 personas">4 personas</option>
+          <option value="6 personas">6 personas</option>
+          <option value="Grupo (+6)">Grupo (+6)</option>
+        </select>
+      </div>
+      <button onclick="sendReservation()" class="btn-wa" style="width:100%;justify-content:center;margin-top:10px">
+        Confirmar Reserva por WhatsApp
+      </button>
+    </div>
+  </section>
+
+  <section class="horarios" id="horarios">
+    <p class="section-label reveal">Visítanos</p>
+    <h2 class="section-title reveal">Horarios & <em>Ubicación</em></h2>
+    <div class="horarios-box reveal">
+      <div class="horario-row"><span class="dia">Lunes a Domingo</span><span class="hora">12:00 PM — 12:00 AM</span></div>
+      <div class="address-block">
+        <div>📍 <a href="https://maps.google.com/?q=Rbla.+Mahatma+Gandhi,+Montevideo" target="_blank">Rbla. Mahatma Gandhi, 11300 Montevideo</a></div>
+        <div>📞 <a href="tel:099910600">099 910 600</a></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">Pier <span>21</span></div>
+        <p class="footer-desc">Restaurante & Terraza frente al mar en la Rambla de Montevideo, Uruguay.</p>
+      </div>
+      <div>
+        <h4>Navegación</h4>
+        <ul>
+          <li><a href="#sobre">Nosotros</a></li>
+          <li><a href="#menu">Menú</a></li>
+          <li><a href="#galeria">Terraza</a></li>
+          <li><a href="#reservas">Reservas</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contacto</h4>
+        <ul>
+          <li><a href="https://wa.me/59899910600">WhatsApp Directo</a></li>
+          <li><a href="tel:099910600">099 910 600</a></li>
+          <li><a href="#horarios">Montevideo, Uruguay</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Pier 21 Montevideo · Todos los derechos reservados</p>
+      <p>Diseñado para Pier 21</p>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/59899910600" class="wa-float" target="_blank" title="Contactar por WhatsApp">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+
+  <script>
+    window.addEventListener('scroll', () => {
+      document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+
+    function sendReservation() {
+      const name = document.getElementById('res-name').value || 'Cliente';
+      const date = document.getElementById('res-date').value || 'Por acordar';
+      const time = document.getElementById('res-time').value || '20:30';
+      const guests = document.getElementById('res-guests').value;
+      
+      const text = `Hola Pier 21! Quisiera reservar una mesa para ${guests}.\n\n📌 Nombre: ${name}\n📅 Fecha: ${date}\n⏰ Hora: ${time}`;
+      window.open(`https://wa.me/59899910600?text=${encodeURIComponent(text)}`, '_blank');
+    }
+  </script>
+
+</body>
 </html>
