@@ -25,15 +25,15 @@
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 16px 5%;
-      background: rgba(15, 23, 42, 0.94);
+      padding: 14px 5%;
+      background: rgba(15, 23, 42, 0.95);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid rgba(255,255,255,0.08);
       transition: all .3s;
     }
     nav.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,0.3); padding: 10px 5%; }
     .nav-logo { display: flex; align-items: center; text-decoration: none; }
-    .nav-logo img { height: 75px; width: auto; object-fit: contain; mix-blend-mode: screen; filter: brightness(1.4); }
+    .nav-logo img { height: 70px; width: auto; object-fit: contain; mix-blend-mode: screen; filter: brightness(1.4); }
     
     .nav-links { display: flex; gap: 28px; list-style: none; align-items: center; }
     .nav-links a { text-decoration: none; font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.8); transition: color .25s; }
@@ -41,15 +41,19 @@
     .nav-cta { background: var(--gold) !important; color: var(--white) !important; padding: 10px 22px; border-radius: 2px; transition: background .3s !important; }
     .nav-cta:hover { background: var(--gold-light) !important; }
 
-    /* HAMBURGER MENU BUTTON */
+    /* BOTÓN TIPO OLA / HAMBURGUESA ESTILIZADA */
     .menu-toggle {
-      display: none; background: none; border: none; cursor: pointer;
-      flex-direction: column; gap: 6px; z-index: 150; padding: 4px;
+      display: none; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 50%; width: 44px; height: 44px; cursor: pointer;
+      flex-direction: column; gap: 5px; justify-content: center; align-items: center; z-index: 150;
     }
+    /* Estilo de olas blancas exactas */
     .menu-toggle span {
-      display: block; width: 26px; height: 2px; background: var(--white);
-      transition: all .3s ease;
+      display: block; width: 20px; height: 2.5px; background: #FFFFFF;
+      border-radius: 4px; transition: all .3s ease;
     }
+    .menu-toggle span:nth-child(1) { border-radius: 50% 50% 0 0 / 100% 100% 0 0; }
+    .menu-toggle span:nth-child(2) { border-radius: 0 0 50% 50% / 0 0 100% 100%; width: 16px; }
 
     /* HERO */
     .hero {
@@ -179,7 +183,7 @@
     @media (max-width:900px) {
       .menu-toggle { display: flex; }
       .nav-links {
-        position: fixed; top: 0; right: -100%; width: 75%; height: 100vh;
+        position: fixed; top: 0; right: -100%; width: 80%; height: 100vh;
         background: rgba(15, 23, 42, 0.98); backdrop-filter: blur(16px);
         flex-direction: column; justify-content: center; align-items: center;
         gap: 32px; transition: right 0.4s ease-in-out;
@@ -200,7 +204,6 @@
       <img src="logo.png" alt="Pier 21 Logo"/>
     </a>
     <button class="menu-toggle" id="mobile-menu" aria-label="Abrir Menú">
-      <span></span>
       <span></span>
       <span></span>
     </button>
